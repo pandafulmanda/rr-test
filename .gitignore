@@ -1,3 +1,10 @@
 .DS_Store
+
+# Ignore locally installed packrat packages
 packrat/lib*
 packrat/src
+
+# Ignore rendered files
+*.html
+test-spin.md
+figure/*
