@@ -1,0 +1,47 @@
+---
+title: "crickets"
+author: "neeraj"
+date: "February 2, 2016"
+output: html_document
+---
+
+# Crickets dataset
+
+## Our question: Do crickets chirp more when it is hotter?
+
+### Striped Ground Crickets
+
+<img src='http://previews.123rf.com/images/izakowski/izakowski1012/izakowski101200030/8489857-funny-grasshopper-Stock-Vector-cartoon-cricket-grasshopper.jpg' width='400'/>
+
+## What do they sound like?
+<iframe src="http://player.vimeo.com/video/81114843" height="200" width="680" allowfullscreen="" frameborder="0"></iframe>
+
+## Taking a look at the data
+
+```{r}
+require(ggplot2)
+d <- read.table('crickets.csv', sep=',', header=TRUE)
+
+d <- d[1:5, ]
+print(d)
+```
+
+## scatterplot of temperature by chirps per second
+
+```{r}
+ggplot(data=d, aes(x=Chirpspersecond, y=Temperature)) + geom_point() + geom_smooth(method='lm', se=FALSE)
+```
+
+## Are temperature and chirps per second related?
+
+```{r}
+mod <- lm(Temperature ~ Chirpspersecond, data=d)
+```
+
+
+```{r results='asis'}
+require(stargazer)
+
+stargazer(mod, type='html')
+```
+
